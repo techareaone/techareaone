@@ -1,16 +1,19 @@
-## Hi there 👋
+<div align="center">
 
-<!--
-**techareaone/techareaone** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
 
-Here are some ideas to get you started:
+  <!-- border box -->
+  <rect x="5" y="5" width="290" height="140" rx="12"
+        fill="none" stroke="#888" stroke-width="2"/>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+  <!-- moving ball -->
+  <circle r="10" fill="#4FC3F7">
+    <animateMotion
+      dur="3s"
+      repeatCount="indefinite"
+      path="M20,20 L280,20 L280,130 L20,130 Z" />
+  </circle>
+
+</svg>
+
+</div>

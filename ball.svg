@@ -1,104 +1,66 @@
 <svg width="600" height="400" viewBox="0 0 600 400"
      xmlns="http://www.w3.org/2000/svg">
 
-  <rect width="600" height="400" fill="black"/>
+  <!-- TRANSPARENT BACKGROUND -->
 
-  <!-- Center line -->
-  <line x1="300" y1="0" x2="300" y2="400"
-        stroke="white" stroke-dasharray="10,10" opacity="0.3"/>
+  <!-- ORBIT GUIDES (all perfect circles) -->
+  <circle cx="300" cy="200" r="45" fill="none" stroke="grey" opacity="0.25"/>
+  <circle cx="300" cy="200" r="85" fill="none" stroke="grey" opacity="0.25"/>
+  <circle cx="300" cy="200" r="125" fill="none" stroke="grey" opacity="0.25"/>
+  <circle cx="300" cy="200" r="165" fill="none" stroke="grey" opacity="0.18"/>
 
-  <!-- Left paddle -->
-  <rect id="leftPaddle" x="20" y="150" width="10" height="100" fill="white"/>
+  <!-- CENTER TEXT -->
+  <text x="300" y="205"
+        text-anchor="middle"
+        font-size="46"
+        font-family="Arial Black"
+        fill="black">
+    TRADELY
+  </text>
 
-  <!-- Right paddle -->
-  <rect id="rightPaddle" x="570" y="150" width="10" height="100" fill="white"/>
+  <text x="300" y="235"
+        text-anchor="middle"
+        font-size="14"
+        font-family="Arial"
+        fill="black"
+        opacity="0.8">
+    tradely.dev
+  </text>
 
-  <!-- Ball -->
-  <circle id="ball" cx="300" cy="200" r="8" fill="white"/>
+  <!-- ORBIT 1 -->
+  <circle r="4" fill="black">
+    <animateMotion dur="3.2s" repeatCount="indefinite"
+      path="M300,200
+            m-45,0
+            a45,45 0 1,1 90,0
+            a45,45 0 1,1 -90,0"/>
+  </circle>
 
-  <script><![CDATA[
-    const svg = document.documentElement;
+  <!-- ORBIT 2 -->
+  <circle r="5" fill="black">
+    <animateMotion dur="5.4s" repeatCount="indefinite"
+      path="M300,200
+            m-85,0
+            a85,85 0 1,1 170,0
+            a85,85 0 1,1 -170,0"/>
+  </circle>
 
-    const ball = document.getElementById("ball");
-    const left = document.getElementById("leftPaddle");
-    const right = document.getElementById("rightPaddle");
+  <!-- ORBIT 3 -->
+  <circle r="6" fill="black">
+    <animateMotion dur="7.6s" repeatCount="indefinite"
+      path="M300,200
+            m-125,0
+            a125,125 0 1,1 250,0
+            a125,125 0 1,1 -250,0"/>
+  </circle>
 
-    const W = 600;
-    const H = 400;
+  <!-- ORBIT 4 -->
+  <circle r="4.5" fill="black">
+    <animateMotion dur="6.1s" repeatCount="indefinite"
+      path="M300,200
+            m-165,0
+            a165,165 0 1,1 330,0
+            a165,165 0 1,1 -330,0"/>
+  </circle>
 
-    let bx = 300, by = 200;
-    let vx = 3.5, vy = 2.2;
-    const r = 8;
-
-    let lpY = 150;
-    let rpY = 150;
-    const paddleH = 100;
-
-    function reset() {
-      bx = 300;
-      by = 200;
-      vx = (Math.random() > 0.5 ? 1 : -1) * 3.5;
-      vy = (Math.random() * 2 - 1) * 2.5;
-    }
-
-    function update() {
-      // Move paddles (simple AI tracking with lag)
-      lpY += ((by - paddleH/2) - lpY) * 0.08;
-      rpY += ((by - paddleH/2) - rpY) * 0.08;
-
-      lpY = Math.max(0, Math.min(H - paddleH, lpY));
-      rpY = Math.max(0, Math.min(H - paddleH, rpY));
-
-      left.setAttribute("y", lpY);
-      right.setAttribute("y", rpY);
-
-      // Move ball
-      bx += vx;
-      by += vy;
-
-      // Top/bottom collision
-      if (by - r < 0 || by + r > H) {
-        vy *= -1;
-      }
-
-      // Left paddle collision
-      if (
-        bx - r < 30 &&
-        by > lpY &&
-        by < lpY + paddleH &&
-        vx < 0
-      ) {
-        vx *= -1;
-
-        // add angle based on hit position
-        let offset = (by - (lpY + paddleH/2)) / (paddleH/2);
-        vy += offset * 2;
-      }
-
-      // Right paddle collision
-      if (
-        bx + r > 570 &&
-        by > rpY &&
-        by < rpY + paddleH &&
-        vx > 0
-      ) {
-        vx *= -1;
-
-        let offset = (by - (rpY + paddleH/2)) / (paddleH/2);
-        vy += offset * 2;
-      }
-
-      // Score/reset if missed
-      if (bx < 0 || bx > W) {
-        reset();
-      }
-
-      ball.setAttribute("cx", bx);
-      ball.setAttribute("cy", by);
-
-      requestAnimationFrame(update);
-    }
-
-    update();
-  ]]></script>
 </svg>
